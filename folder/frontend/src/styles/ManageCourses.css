@@ -1,0 +1,186 @@
+.manage-courses {
+  background: linear-gradient(135deg, #1e1e2f 0%, #2e2e4d 100%);
+  min-height: 100vh;
+  color: white;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+.manage-courses .container {
+  padding-top: 2rem;
+}
+
+.manage-courses .page-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1rem;
+}
+
+.manage-courses .card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 2rem;
+}
+
+.manage-courses .card-header {
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  color: white;
+}
+
+.manage-courses .card-body {
+  padding: 1.5rem;
+}
+
+.manage-courses .form-control {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.manage-courses .form-control:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.manage-courses .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.manage-courses .form-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.manage-courses .form-select {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.manage-courses .form-select:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
+}
+
+.manage-courses .form-select option {
+  background-color: #1e1e2f;
+  color: white;
+}
+
+.manage-courses .btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.manage-courses .btn-primary {
+  background: linear-gradient(135deg, #e14eca 0%, #ba54f5 100%);
+  border: none;
+}
+
+.manage-courses .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(225, 78, 202, 0.4);
+}
+
+.manage-courses .btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+}
+
+.manage-courses .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.manage-courses .btn-danger {
+  background: linear-gradient(135deg, #f5365c 0%, #f56036 100%);
+  border: none;
+}
+
+.manage-courses .btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(245, 54, 92, 0.4);
+}
+
+.manage-courses .table {
+  color: white;
+}
+
+.manage-courses .table th {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+}
+
+.manage-courses .table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  vertical-align: middle;
+}
+
+.manage-courses .table tr:last-child td {
+  border-bottom: none;
+}
+
+.manage-courses .action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.manage-courses .btn-sm {
+  padding: 0.4rem 0.8rem;
+}
+
+.manage-courses .alert {
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.manage-courses .loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+@media (max-width: 768px) {
+  .manage-courses {
+    padding: 1rem;
+  }
+  
+  .manage-courses .page-header {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .manage-courses .card {
+    margin-bottom: 1.5rem;
+  }
+  
+  .manage-courses .table-responsive {
+    margin: 0 -1.5rem;
+    width: calc(100% + 3rem);
+  }
+} 

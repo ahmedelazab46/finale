@@ -1,0 +1,313 @@
+/* Ultra Modern Navbar Styles */
+.ultra-modern-navbar {
+  background: #1a1a1a !important;
+  padding: 0.5rem 2rem;
+  transition: all 0.3s ease;
+  border-radius: 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  margin: 0;
+  border: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.ultra-modern-navbar.scrolled {
+  padding: 0.4rem 2rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ultra-modern-navbar > .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Adjust body padding to account for floating navbar */
+body {
+  padding-top: 60px !important;
+  margin: 0;
+  background: #1a1a1a;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Brand Logo */
+.ultra-modern-brand {
+  display: flex;
+  align-items: center;
+  padding: 0 !important;
+  margin-right: 1rem;
+}
+
+.brand-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.ultra-modern-brand:hover .brand-image {
+  transform: scale(1.05);
+}
+
+/* Navigation Container */
+.nav-links-container {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Navigation Links */
+.ultra-modern-nav-link {
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  padding: 0.6rem 1.2rem !important;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  white-space: nowrap;
+}
+
+.ultra-modern-nav-link:hover,
+.ultra-modern-nav-link.active {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+  color: #2563eb !important;
+}
+
+.nav-icon {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+/* Right Side Nav */
+.ultra-modern-right-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: auto;
+}
+
+/* Auth Buttons */
+.ultra-modern-auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.ultra-modern-login-btn,
+.ultra-modern-signup-btn {
+  padding: 0.6rem 1.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  min-width: 100px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ultra-modern-login-btn {
+  color: #2d3436;
+  background: transparent;
+  border: 2px solid rgba(37, 99, 235, 0.3);
+}
+
+.ultra-modern-signup-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.ultra-modern-login-btn:hover,
+.ultra-modern-signup-btn:hover {
+  transform: translateY(-2px);
+  background: #1d4ed8;
+  color: white;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+}
+
+.ultra-modern-login-btn.btn-link {
+  text-decoration: none !important;
+}
+
+.ultra-modern-login-btn.btn-link::after {
+  display: none !important;
+}
+
+.ultra-modern-login-btn.dropdown-toggle::after {
+  display: none !important;
+}
+
+.ultra-modern-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(135deg, #FD1015 0%, #FF4B4E 100%) border-box;
+  color: #FD1015;
+}
+
+.ultra-modern-logout-btn:hover {
+  background: linear-gradient(135deg, #FD1015 0%, #FF4B4E 100%) padding-box,
+              linear-gradient(135deg, #FD1015 0%, #FF4B4E 100%) border-box;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(253, 16, 21, 0.25);
+}
+
+.logout-icon {
+  transition: all 0.3s ease;
+}
+
+.ultra-modern-logout-btn:hover .logout-icon {
+  transform: translateX(4px) rotate(15deg);
+}
+
+/* Mobile Toggle */
+.ultra-modern-toggler {
+  border: none !important;
+  padding: 0.75rem !important;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.toggle-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(253, 16, 21, 0.1) 0%, rgba(255, 75, 78, 0.1) 100%);
+  transition: all 0.3s ease;
+}
+
+.toggle-icon {
+  color: #2d3436;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.ultra-modern-toggler:hover .toggle-icon-container {
+  transform: rotate(90deg);
+  background: linear-gradient(135deg, rgba(253, 16, 21, 0.2) 0%, rgba(255, 75, 78, 0.2) 100%);
+}
+
+.ultra-modern-toggler:hover .toggle-icon {
+  color: #FD1015;
+}
+
+/* Animations */
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile Menu */
+@media (max-width: 991.98px) {
+  .ultra-modern-navbar {
+    padding: 1rem 1.5rem;
+    margin: 0.8rem 1rem;
+  }
+
+  .ultra-modern-navbar > .container {
+    gap: 1rem;
+  }
+
+  .navbar-collapse {
+    background: #ffffff;
+    margin-top: 1rem;
+    padding: 1.2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links-container {
+    flex-direction: column;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+  }
+
+  .ultra-modern-right-nav {
+    flex-direction: column;
+    align-items: stretch;
+    margin: 1rem 0 0 0;
+    gap: 1rem;
+  }
+
+  .ultra-modern-auth-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .ultra-modern-login-btn,
+  .ultra-modern-signup-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 0.8rem;
+  }
+}
+
+.ultra-modern-lang-selector {
+  padding: 0.6rem 1.2rem !important;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid rgba(37, 99, 235, 0.2);
+  color: #2d3436;
+  transition: all 0.3s ease;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ultra-modern-lang-selector:hover {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: rgba(37, 99, 235, 0.3);
+  transform: translateY(-1px);
+}
+
+.ultra-modern-lang-selector:after {
+  display: none !important;
+}
+
+.lang-code {
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  color: #2d3436;
+}
+
+.ultra-modern-lang-selector:hover .lang-code {
+  color: #2563eb;
+}

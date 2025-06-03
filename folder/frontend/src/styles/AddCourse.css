@@ -1,0 +1,239 @@
+.add-course {
+  background: linear-gradient(135deg, #1e1e2f 0%, #2e2e4d 100%);
+  min-height: 100vh;
+  color: white;
+  padding: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+.add-course .container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.add-course .page-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-course .page-header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.add-course .page-header p {
+  color: #a8b2d1;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.add-course .form-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-course .form-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+}
+
+.add-course .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.add-course .form-label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: #a8b2d1;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.add-course .form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: white;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.add-course .form-control:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.add-course .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.add-course textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.add-course select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+}
+
+.add-course .btn-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.add-course .btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+}
+
+.add-course .btn-primary {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+}
+
+.add-course .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  background: linear-gradient(135deg, #7048e8 0%, #9333ea 100%);
+}
+
+.add-course .btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.add-course .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.add-course .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.add-course .spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top-color: #6366f1;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .add-course {
+    padding: 1rem;
+  }
+
+  .add-course .form-card {
+    padding: 1.5rem;
+  }
+
+  .add-course .btn-group {
+    flex-direction: column;
+  }
+
+  .add-course .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.add-course .videos-list {
+  margin-top: 2rem;
+}
+
+.add-course .video-item {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.add-course .video-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(5px);
+}
+
+.add-course .video-item strong {
+  color: #fff;
+  font-size: 1rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.add-course .video-item small {
+  color: #a8b2d1;
+  font-size: 0.875rem;
+}
+
+.add-course .alert {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+.add-course .alert-danger {
+  background: rgba(220, 38, 38, 0.1);
+  border-left: 4px solid rgba(220, 38, 38, 0.5);
+}
+
+.add-course .alert-success {
+  background: rgba(16, 185, 129, 0.1);
+  border-left: 4px solid rgba(16, 185, 129, 0.5);
+} 

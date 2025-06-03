@@ -1,0 +1,217 @@
+/* Reset default margins and padding */
+body, html {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: #1a1f2c;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  margin: 0 !important;
+  padding: 0.5rem 0 !important;
+  background: rgba(26, 31, 44, 0.95) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.certificates-page {
+  background: linear-gradient(135deg, #1a1f2c 0%, #2d3748 100%);
+  min-height: 100vh;
+  color: white;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.certificates-page .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.certificates-page .page-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.certificates-page .page-header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #fff, #a8b2d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.certificates-page .empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.certificates-page .empty-state-icon {
+  font-size: 4rem;
+  color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 1.5rem;
+}
+
+.certificates-page .empty-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #a8b2d1;
+}
+
+.certificates-page .empty-state p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.1rem;
+}
+
+.certificates-page .certificate-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.certificates-page .certificate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.certificates-page .certificate-preview {
+  position: relative;
+  padding-top: 70%;
+  overflow: hidden;
+}
+
+.certificates-page .certificate-preview img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.certificates-page .certificate-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.certificates-page .certificate-preview:hover .certificate-overlay {
+  opacity: 1;
+}
+
+.certificates-page .preview-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.certificates-page .preview-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.certificates-page .certificate-info {
+  padding: 1.5rem;
+}
+
+.certificates-page .certificate-info h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.certificates-page .completion-date {
+  color: #a8b2d1;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.certificates-page .certificate-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.certificates-page .action-button {
+  background: linear-gradient(to right, #667eea, #764ba2);
+  color: white;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.certificates-page .action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.certificates-page .action-button.secondary {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.certificates-page .action-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.certificates-page .alert {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.certificates-page .alert-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .certificates-page {
+    padding: 1rem;
+  }
+
+  .certificates-page .certificate-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .certificates-page .page-header h2 {
+    font-size: 1.5rem;
+  }
+} 

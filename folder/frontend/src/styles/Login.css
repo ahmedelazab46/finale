@@ -1,0 +1,448 @@
+/* Reset scrollbar for the entire auth pages */
+html:has(.login-container),
+body:has(.login-container) {
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+  height: 100vh;
+  width: 100vw;
+}
+
+.login-container {
+  background: linear-gradient(135deg, #1e1e2f 0%, #2e2e4d 100%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.login-content {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  gap: 2rem;
+  height: auto;
+}
+
+.login-form-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+  background: rgba(30, 30, 47, 0.9);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  margin: 0;
+  height: auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+  padding: 0;
+}
+
+.logo-link {
+  display: inline-block;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.logo-link:hover {
+  transform: scale(1.05);
+}
+
+.logo-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, rgba(225, 78, 202, 0.2) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.logo-link:hover::after {
+  opacity: 1;
+}
+
+.logo {
+  height: 35px;
+  width: auto;
+  filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 5px rgba(225, 78, 202, 0.3));
+  transition: all 0.3s ease;
+}
+
+.logo:hover {
+  filter: brightness(1.3) contrast(1.2) drop-shadow(0 0 8px rgba(225, 78, 202, 0.6));
+}
+
+.logo path {
+  stroke: #ffffff;
+}
+
+.brand-name {
+  margin: 0;
+  color: #e14eca;
+  font-weight: bold;
+  font-size: 1.8rem;
+  text-shadow: 0 0 10px rgba(225, 78, 202, 0.3);
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  height: auto;
+}
+
+.login-form h1 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.login-form .subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  color: white;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #e14eca;
+  box-shadow: 0 0 0 2px rgba(225, 78, 202, 0.2);
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-options {
+  margin-bottom: 1.25rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #e14eca;
+}
+
+.forgot-password {
+  color: #e14eca;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: #ff6edb;
+  text-decoration: underline;
+}
+
+.sign-in-button {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #e14eca 0%, #ba54f5 100%);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.sign-in-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(225, 78, 202, 0.4);
+}
+
+.google-sign-in {
+  width: 100%;
+  padding: 0.75rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.google-sign-in:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.google-icon {
+  font-size: 1.2rem;
+}
+
+.signup-prompt {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.signup-link {
+  color: #e14eca;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.signup-link:hover {
+  color: #ff6edb;
+  text-decoration: underline;
+}
+
+.illustration-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-icons {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
+  position: absolute;
+  color: rgba(225, 78, 202, 0.2);
+  animation: float 6s infinite ease-in-out;
+}
+
+.mail { top: 20%; left: 20%; font-size: 2rem; animation-delay: 0s; }
+.chat { top: 60%; left: 30%; font-size: 1.8rem; animation-delay: 1s; }
+.globe { top: 30%; right: 25%; font-size: 2.2rem; animation-delay: 2s; }
+.phone { top: 70%; right: 20%; font-size: 1.6rem; animation-delay: 3s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.illustration {
+  width: 80%;
+  max-width: 500px;
+  opacity: 0.8;
+}
+
+.woman-illustration {
+  width: 100%;
+  height: auto;
+}
+
+.head { fill: #e14eca; }
+.body { stroke: #e14eca; stroke-width: 4; fill: none; }
+.left-arm, .right-arm { stroke: #e14eca; stroke-width: 4; fill: none; }
+.ok-gesture { fill: #e14eca; }
+
+@media (max-width: 1024px) {
+  .login-container {
+    padding: 0;
+  }
+
+  .login-content {
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+
+  .illustration-section {
+    display: none;
+  }
+  
+  .login-form-section {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-content {
+    margin: 0.5rem auto;
+    padding: 0 0.5rem;
+  }
+  
+  .login-form-section {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  .form-group-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-group-row .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-input {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .brand {
+    margin-bottom: 1.5rem;
+  }
+  
+  .logo {
+    height: 30px;
+  }
+
+  .form-group-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .form-group-row .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .brand-name {
+    font-size: 1.5rem;
+  }
+
+  .login-form h1 {
+    font-size: 1.75rem;
+  }
+
+  .login-form .subtitle {
+    font-size: 0.9rem;
+  }
+}
+
+.form-group-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group-row .form-group {
+  flex: 1;
+}
+
+.terms-link {
+  color: #e14eca;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.terms-link:hover {
+  color: #ff6edb;
+  text-decoration: underline;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #e14eca;
+  cursor: pointer;
+}
+
+.checkbox-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.error-message {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  color: #ff4d4d;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.google-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.google-button-container > div {
+  width: 100% !important;
+}
+  

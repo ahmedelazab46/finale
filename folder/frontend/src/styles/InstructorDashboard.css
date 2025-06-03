@@ -1,0 +1,271 @@
+.instructor-dashboard {
+  background: linear-gradient(135deg, #1a1f2c 0%, #2d3748 100%);
+  min-height: 100vh;
+  color: white;
+  margin: 0;
+  padding: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+.instructor-dashboard .container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.instructor-dashboard .dashboard-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.instructor-dashboard .dashboard-header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #fff, #a8b2d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.instructor-dashboard .dashboard-header p {
+  color: #a8b2d1;
+  font-size: 1.1rem;
+}
+
+.instructor-dashboard .stats-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.instructor-dashboard .stats-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #4f46e5, #7c3aed);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.instructor-dashboard .stats-card:hover::before {
+  opacity: 1;
+}
+
+.instructor-dashboard .stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.instructor-dashboard .stats-card .icon {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  font-size: 2rem;
+  color: rgba(79, 70, 229, 0.3);
+  z-index: 1;
+}
+
+.instructor-dashboard .stats-card h5 {
+  font-size: 1.1rem;
+  color: #a8b2d1;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 2;
+}
+
+.instructor-dashboard .stats-card .value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(to right, #fff, #a8b2d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+.instructor-dashboard .stats-card .subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  position: relative;
+  z-index: 2;
+}
+
+.instructor-dashboard .data-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.instructor-dashboard .data-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.instructor-dashboard .data-card .card-header {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.5rem 2rem;
+  border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.instructor-dashboard .data-card .card-header h5 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.instructor-dashboard .data-card .card-body {
+  padding: 2rem;
+}
+
+.instructor-dashboard .dashboard-table {
+  width: 100%;
+  color: white;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.instructor-dashboard .dashboard-table th {
+  color: #a8b2d1;
+  font-weight: 500;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.instructor-dashboard .dashboard-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+
+.instructor-dashboard .dashboard-table tr:last-child td {
+  border-bottom: none;
+}
+
+.instructor-dashboard .dashboard-table tr {
+  transition: background-color 0.3s ease;
+}
+
+.instructor-dashboard .dashboard-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.instructor-dashboard .progress {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.instructor-dashboard .progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #4f46e5, #7c3aed);
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.instructor-dashboard .loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #1a1f2c 0%, #2d3748 100%);
+}
+
+.instructor-dashboard .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  color: #4f46e5;
+}
+
+.instructor-dashboard .action-button {
+  background: rgba(79, 70, 229, 0.1);
+  border: 1px solid rgba(79, 70, 229, 0.3);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.instructor-dashboard .action-button:hover {
+  background: rgba(79, 70, 229, 0.2);
+  border-color: rgba(79, 70, 229, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+.instructor-dashboard .action-button.secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.instructor-dashboard .action-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.instructor-dashboard .badge {
+  padding: 0.35rem 0.65rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.instructor-dashboard .badge-primary {
+  background: rgba(78, 115, 223, 0.2);
+  color: #4e73df;
+}
+
+.instructor-dashboard .badge-success {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+}
+
+@media (max-width: 768px) {
+  .instructor-dashboard {
+    padding: 1rem;
+  }
+
+  .instructor-dashboard .stats-card {
+    margin-bottom: 1rem;
+  }
+
+  .instructor-dashboard .dashboard-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .instructor-dashboard .action-button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    justify-content: center;
+  }
+} 
