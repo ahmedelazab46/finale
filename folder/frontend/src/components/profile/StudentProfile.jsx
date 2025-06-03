@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Card, Form, Button, Alert, Row, Col } from 'react-bootstrap';
+import { Container, Form, Button, Alert, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { FaUser, FaEnvelope, FaPhone, FaLock, FaCamera } from 'react-icons/fa';
+import '../../styles/StudentProfile.css';
 
 const API_BASE_URL = 'http://127.0.0.1:8000';
 const DEFAULT_AVATAR = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
@@ -162,139 +164,207 @@ const StudentProfile = () => {
 
   if (loading) {
     return (
-      <Container className="mt-4">
-        <div>جارٍ التحميل...</div>
-      </Container>
+      <div className="student-profile">
+        <Container>
+          <div className="loading-spinner">جارٍ التحميل...</div>
+        </Container>
+      </div>
     );
   }
 
   return (
-    <Container className="mt-4">
-      <Row>
-        <Col md={4}>
-          <Card className="mb-4">
-            <Card.Body className="text-center">
-              <img
-                src={
-                  profile.profile_pic ? `${API_BASE_URL}${profile.profile_pic}` :
-                  profile.user.profile_picture ? `${API_BASE_URL}${profile.user.profile_picture}` :
-                  DEFAULT_AVATAR
-                }
-                alt="Profile"
-                className="rounded-circle mb-3"
-                style={{ width: '150px', height: '150px', objectFit: 'cover' }}
-              />
-              <h3>{profile.user.first_name} {profile.user.last_name}</h3>
-              <p className="text-muted">طالب</p>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={8}>
-          <Card>
-            <Card.Body>
-              <Card.Title>معلومات الملف الشخصي</Card.Title>
-              {error && <Alert variant="danger">{JSON.stringify(error)}</Alert>}
-              {success && <Alert variant="success">{success}</Alert>}
-              
-              <Form onSubmit={handleSubmit}>
-                <Row>
-                  <Col md={6}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>الاسم الأول</Form.Label>
+    <div className="student-profile">
+      <Container>
+        <div className="profile-header">
+          <h2>الملف الشخصي</h2>
+          <p className="text-light opacity-75">إدارة معلوماتك الشخصية وإعدادات الحساب</p>
+        </div>
+
+        <Row>
+          <Col md={4}>
+            <div className="profile-card">
+              <div className="profile-info">
+                {profile.profile_pic ? (
+                  <img
+                    src={
+                      profile.profile_pic instanceof File
+                        ? URL.createObjectURL(profile.profile_pic)
+                        : `${API_BASE_URL}${profile.profile_pic}`
+                    }
+                    alt="Profile"
+                    className="profile-avatar"
+                  />
+                ) : (
+                  <div className="profile-avatar-placeholder">
+                    <FaUser size={50} />
+                  </div>
+                )}
+                <h3 className="profile-name">{`${profile.user.first_name} ${profile.user.last_name}`}</h3>
+                <p className="profile-title">طالب</p>
+              </div>
+            </div>
+          </Col>
+
+          <Col md={8}>
+            <div className="profile-card">
+              <div className="profile-info">
+                <h4 className="section-title mb-4">المعلومات الشخصية</h4>
+                
+                {error && <Alert variant="danger" className="alert">{error}</Alert>}
+                {success && <Alert variant="success" className="alert">{success}</Alert>}
+
+                <Form onSubmit={handleSubmit}>
+                  <Row>
+                    <Col md={6}>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">الاسم الأول</Form.Label>
+                        <div className="input-group">
+                          <span className="input-group-text">
+                            <FaUser />
+                          </span>
+                          <Form.Control
+                            type="text"
+                            name="user.first_name"
+                            value={profile.user.first_name || ''}
+                            onChange={handleChange}
+                            className="form-control"
+                          />
+                        </div>
+                      </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Group className="form-group">
+                        <Form.Label className="form-label">الاسم الأخير</Form.Label>
+                        <div className="input-group">
+                          <span className="input-group-text">
+                            <FaUser />
+                          </span>
+                          <Form.Control
+                            type="text"
+                            name="user.last_name"
+                            value={profile.user.last_name || ''}
+                            onChange={handleChange}
+                            className="form-control"
+                          />
+                        </div>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
+                  <Form.Group className="form-group">
+                    <Form.Label className="form-label">البريد الإلكتروني</Form.Label>
+                    <div className="input-group">
+                      <span className="input-group-text">
+                        <FaEnvelope />
+                      </span>
                       <Form.Control
-                        type="text"
-                        name="user.first_name"
-                        value={profile.user.first_name || ''}
-                        onChange={handleChange}
+                        type="email"
+                        name="user.email"
+                        value={profile.user.email || ''}
+                        disabled
+                        className="form-control"
                       />
-                    </Form.Group>
-                  </Col>
-                  <Col md={6}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>الاسم الأخير</Form.Label>
+                    </div>
+                  </Form.Group>
+
+                  <Form.Group className="form-group">
+                    <Form.Label className="form-label">رقم الهاتف</Form.Label>
+                    <div className="input-group">
+                      <span className="input-group-text">
+                        <FaPhone />
+                      </span>
                       <Form.Control
-                        type="text"
-                        name="user.last_name"
-                        value={profile.user.last_name || ''}
+                        type="tel"
+                        name="phone"
+                        value={profile.phone || ''}
                         onChange={handleChange}
+                        className="form-control"
                       />
+                    </div>
+                  </Form.Group>
+
+                  <Form.Group className="form-group">
+                    <Form.Label className="form-label">صورة الملف الشخصي</Form.Label>
+                    <div className="input-group">
+                      <span className="input-group-text">
+                        <FaCamera />
+                      </span>
+                      <Form.Control
+                        type="file"
+                        name="profile_pic"
+                        onChange={handleChange}
+                        accept="image/*"
+                        className="form-control"
+                      />
+                    </div>
+                  </Form.Group>
+
+                  <div className="password-section mt-4">
+                    <h5 className="section-title mb-3">تغيير كلمة المرور</h5>
+                    
+                    <Form.Group className="form-group">
+                      <Form.Label className="form-label">كلمة المرور الحالية</Form.Label>
+                      <div className="input-group">
+                        <span className="input-group-text">
+                          <FaLock />
+                        </span>
+                        <Form.Control
+                          type="password"
+                          name="user.current_password"
+                          value={profile.user.current_password || ''}
+                          onChange={handleChange}
+                          className="form-control"
+                        />
+                      </div>
                     </Form.Group>
-                  </Col>
-                </Row>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>البريد الإلكتروني</Form.Label>
-                  <Form.Control
-                    type="email"
-                    name="user.email"
-                    value={profile.user.email || ''}
-                    disabled
-                  />
-                </Form.Group>
+                    <Form.Group className="form-group">
+                      <Form.Label className="form-label">كلمة المرور الجديدة</Form.Label>
+                      <div className="input-group">
+                        <span className="input-group-text">
+                          <FaLock />
+                        </span>
+                        <Form.Control
+                          type="password"
+                          name="user.new_password"
+                          value={profile.user.new_password || ''}
+                          onChange={handleChange}
+                          className="form-control"
+                        />
+                      </div>
+                    </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>رقم الهاتف</Form.Label>
-                  <Form.Control
-                    type="tel"
-                    name="phone"
-                    value={profile.phone || ''}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
+                    <Form.Group className="form-group">
+                      <Form.Label className="form-label">تأكيد كلمة المرور الجديدة</Form.Label>
+                      <div className="input-group">
+                        <span className="input-group-text">
+                          <FaLock />
+                        </span>
+                        <Form.Control
+                          type="password"
+                          name="user.confirm_password"
+                          value={profile.user.confirm_password || ''}
+                          onChange={handleChange}
+                          className="form-control"
+                        />
+                      </div>
+                    </Form.Group>
+                  </div>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>صورة الملف الشخصي</Form.Label>
-                  <Form.Control
-                    type="file"
-                    name="profile_pic"
-                    onChange={handleChange}
-                    accept="image/*"
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>كلمة المرور الحالية</Form.Label>
-                  <Form.Control
-                    type="password"
-                    name="user.current_password"
-                    value={profile.user.current_password || ''}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>كلمة المرور الجديدة</Form.Label>
-                  <Form.Control
-                    type="password"
-                    name="user.new_password"
-                    value={profile.user.new_password || ''}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3">
-                  <Form.Label>تأكيد كلمة المرور الجديدة</Form.Label>
-                  <Form.Control
-                    type="password"
-                    name="user.confirm_password"
-                    value={profile.user.confirm_password || ''}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-
-                <Button 
-                  variant="primary" 
-                  type="submit" 
-                  disabled={loading}
-                >
-                  {loading ? 'جارٍ الحفظ...' : 'حفظ التغييرات'}
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+                  <Button 
+                    type="submit" 
+                    className="action-button mt-4"
+                    disabled={loading}
+                  >
+                    {loading ? 'جارٍ الحفظ...' : 'حفظ التغييرات'}
+                  </Button>
+                </Form>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 

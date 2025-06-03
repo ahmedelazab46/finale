@@ -27,17 +27,25 @@ class CourseSerializer(serializers.ModelSerializer):
     certificate_available = serializers.SerializerMethodField()
     progress = serializers.SerializerMethodField()
     videos = CourseVideoSerializer(many=True, read_only=True)
-    courseImage = serializers.SerializerMethodField()
+    courseImage = serializers.ImageField(required=False)
     lessons = serializers.SerializerMethodField()
     is_enrolled = serializers.SerializerMethodField()
     instructor_name = serializers.SerializerMethodField()
     students_count = serializers.SerializerMethodField()
     revenue = serializers.SerializerMethodField()
     average_rating = serializers.SerializerMethodField()
+
     class Meta:
         model = Course
-        fields = '__all__'
-        read_only_fields = ['instructor_name', 'slug', 'instructor']
+        fields = [
+            'id', 'title', 'description', 'duration', 'price',
+            'instructor', 'courseImage', 'courseType', 'what_you_will_learn',
+            'requirements', 'level', 'category', 'created_at', 'slug',
+            'certificate_available', 'progress', 'videos', 'lessons',
+            'is_enrolled', 'instructor_name', 'students_count', 'revenue',
+            'average_rating'
+        ]
+        read_only_fields = ['instructor', 'slug']
 
     def get_certificate_available(self, obj):
         # التحقق مما إذا كان الطالب قد أكمل الكورس (progress = 100%)
@@ -79,17 +87,12 @@ class CourseSerializer(serializers.ModelSerializer):
             return 0
 
     def get_courseImage(self, obj):
-        return obj.get_image_url()
-
-    def get_is_enrolled(self, obj):
-        request = self.context.get('request')
-        if not request or not request.user.is_authenticated:
-            return False
-        try:
-            student = request.user.student_profile
-            return Enrollment.objects.filter(student=student, course=obj).exists()
-        except (Student.DoesNotExist, AttributeError):
-            return False
+        if obj.courseImage:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.courseImage.url)
+            return obj.courseImage.url if hasattr(obj.courseImage, 'url') else None
+        return None
 
     def get_instructor_name(self, obj):
         if obj.instructor:
@@ -125,70 +128,37 @@ class CourseSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         request = self.context.get('request')
-        videos_data = []
-        
-        if request and request.data:
-            for key in request.data.keys():
-                if key.startswith('videos[') and key.endswith('][lesson_name]'):
-                    index = key.split('[')[1].split(']')[0]
-                    lesson_name = request.data.get(f'videos[{index}][lesson_name]')
-                    video_url = request.data.get(f'videos[{index}][video_url]')
-                    if lesson_name and video_url:
-                        videos_data.append({
-                            'lesson_name': lesson_name,
-                            'video_url': video_url,
-                            'duration': 0,
-                            'order': index
-                        })
-        try:
-            instructor = Instructor.objects.get(user=request.user)
-        except Instructor.DoesNotExist:
-            raise serializers.ValidationError('المستخدم الحالي ليس لديه حساب Instructor.')
+        if not request or not request.user:
+            raise serializers.ValidationError('User must be authenticated')
 
-        course = Course.objects.create(
-            instructor=instructor.user,
-            title=validated_data.get('title'),
-            description=validated_data.get('description'),
-            price=validated_data.get('price'),
-            duration=validated_data.get('duration'),
-            courseType=validated_data.get('courseType'),
-            what_you_will_learn=validated_data.get('what_you_will_learn'),
-            requirements=validated_data.get('requirements'),
-            level=validated_data.get('level'),
-            category=validated_data.get('category'),
-            courseImage=validated_data.get('courseImage')
-        )
-        
-        for video_data in videos_data:
-            CourseVideo.objects.create(course=course, **video_data)
-        
-        return course
+        # تعيين المدرس
+        validated_data['instructor'] = request.user
+
+        # معالجة الصورة
+        if 'courseImage' in request.FILES:
+            validated_data['courseImage'] = request.FILES['courseImage']
+
+        try:
+            course = Course.objects.create(**validated_data)
+            return course
+        except Exception as e:
+            print(f"Error creating course: {str(e)}")
+            raise serializers.ValidationError(f"Could not create course: {str(e)}")
 
     def update(self, instance, validated_data):
         request = self.context.get('request')
-        videos_data = []
         
-        if request and request.data:
-            for key in request.data.keys():
-                if key.startswith('videos[') and key.endswith('][lesson_name]'):
-                    index = key.split('[')[1].split(']')[0]
-                    lesson_name = request.data.get(f'videos[{index}][lesson_name]')
-                    video_url = request.data.get(f'videos[{index}][video_url]')
-                    if lesson_name and video_url:
-                        videos_data.append({
-                            'lesson_name': lesson_name,
-                            'video_url': video_url
-                        })
-
+        # معالجة الصورة في حالة التحديث
+        if request and 'courseImage' in request.FILES:
+            instance.courseImage = request.FILES['courseImage']
+        
         for attr, value in validated_data.items():
-            setattr(instance, attr, value)
+            if attr != 'courseImage':  # تجنب تحديث الصورة هنا لأننا عالجناها أعلاه
+                setattr(instance, attr, value)
+        
         instance.save()
-        
-        for video_data in videos_data:
-            video = CourseVideo.objects.create(**video_data)
-            instance.videos.add(video)
-        
         return instance
+
     def get_students_count(self, obj):
         return Enrollment.objects.filter(course=obj).count()
 

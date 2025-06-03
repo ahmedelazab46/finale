@@ -11,13 +11,15 @@ import {
   FaPlus, 
   FaUserPlus, 
   FaDollarSign,
-  FaChartLine
+  FaChartLine,
+  FaSignOutAlt,
+  FaHome
 } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
 import '../../../src/styles/AdminDashboard.css';
 
 export default function AdminDashboard() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [stats, setStats] = useState({
     totalUsers: 0,
@@ -86,6 +88,11 @@ export default function AdminDashboard() {
     }
   }, [user]);
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   if (loading) {
     return (
       <div className="admin-dashboard">
@@ -114,23 +121,29 @@ export default function AdminDashboard() {
 
   return (
     <div className="admin-dashboard">
-      <div className="container py-4">
+      <div className="container">
         <div className="dashboard-header">
-          <div className="d-flex justify-content-between align-items-center">
-            <div>
-              <h2 className="mb-1">Admin Dashboard</h2>
-              <p className="text-light opacity-75 mb-0">Welcome back, {user?.email}</p>
-            </div>
-            <div>
-              <button className="action-button me-2" onClick={() => navigate('/admin/manage-instructors')}>
-                <FaUserPlus className="me-2" />
-                Add Instructor
-              </button>
-              <button className="action-button secondary" onClick={() => navigate('/admin/manage-courses')}>
-                <FaBook className="me-2" />
-                Manage Courses
-              </button>
-            </div>
+          <div>
+            <h2>Admin Dashboard</h2>
+            <p>Welcome back, {user?.email}</p>
+          </div>
+          <div className="d-flex align-items-center">
+            <button className="action-button me-2" onClick={() => navigate('/admin/manage-instructors')}>
+              <FaUserPlus />
+              Add Instructor
+            </button>
+            <button className="action-button secondary me-2" onClick={() => navigate('/admin/manage-courses')}>
+              <FaBook />
+              Manage Courses
+            </button>
+            <button className="action-button secondary me-2" onClick={() => navigate('/')}>
+              <FaHome />
+              Back to Home
+            </button>
+            <button className="logout-button" onClick={handleLogout}>
+              <FaSignOutAlt />
+              Logout
+            </button>
           </div>
         </div>
 
@@ -182,6 +195,10 @@ export default function AdminDashboard() {
             <div className="data-card">
               <div className="card-header">
                 <h5>Recent Users</h5>
+                <button className="action-button secondary" onClick={() => navigate('/admin/manage-users')}>
+                  <FaUsers />
+                  View All
+                </button>
               </div>
               <div className="card-body">
                 <table className="dashboard-table">
@@ -216,21 +233,21 @@ export default function AdminDashboard() {
                 <h5>Quick Actions</h5>
               </div>
               <div className="card-body">
-                <div className="quick-actions">
+                <div className="d-grid gap-2">
                   <button className="action-button mb-2" onClick={() => navigate('/admin/manage-students')}>
-                    <FaUsers className="me-2" />
+                    <FaUsers />
                     Manage Students
                   </button>
                   <button className="action-button mb-2" onClick={() => navigate('/admin/manage-courses')}>
-                    <FaBook className="me-2" />
+                    <FaBook />
                     Manage Courses
                   </button>
                   <button className="action-button mb-2" onClick={() => navigate('/admin/manage-instructors')}>
-                    <FaChalkboardTeacher className="me-2" />
+                    <FaChalkboardTeacher />
                     Manage Instructors
                   </button>
                   <button className="action-button secondary">
-                    <FaChartLine className="me-2" />
+                    <FaChartLine />
                     View Reports
                   </button>
                 </div>
@@ -240,6 +257,10 @@ export default function AdminDashboard() {
             <div className="data-card">
               <div className="card-header">
                 <h5>Recent Courses</h5>
+                <button className="action-button secondary" onClick={() => navigate('/admin/manage-courses')}>
+                  <FaBook />
+                  View All
+                </button>
               </div>
               <div className="card-body">
                 <table className="dashboard-table">

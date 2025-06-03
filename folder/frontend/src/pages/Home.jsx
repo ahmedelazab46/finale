@@ -241,6 +241,7 @@ function Home() {
                   className="badge bg-danger px-3 py-2 mb-4 rounded-pill d-inline-block"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  style={{ marginTop: "2rem" }}
                 >
                   Le Wagon Bootcamp
                 </motion.span>
@@ -294,7 +295,7 @@ function Home() {
 
                 {/* Trust Indicators */}
                 <motion.div 
-                  className="hero-trust-indicators mt-5 pt-4"
+                  className="hero-trust-indicators mt-5 pt-4 mb-5"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 }}
@@ -302,34 +303,55 @@ function Home() {
                   <div className="row g-4">
                     <div className="col-6 col-md-4">
                       <div className="d-flex align-items-center">
-                        <div className="icon-box me-3">
-                          <i className="bi bi-people students-icon"></i>
+                        <div className="icon-box me-3 d-flex align-items-center justify-content-center" 
+                             style={{ 
+                               width: "48px", 
+                               height: "48px", 
+                               borderRadius: "12px",
+                               background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                               boxShadow: "0 4px 15px rgba(99, 102, 241, 0.2)"
+                             }}>
+                          <i className="bi bi-people-fill text-white fs-4"></i>
                         </div>
                         <div>
-                          <h4 className="h6 mb-1">50K+ Students</h4>
-                          <p className="small mb-0">Worldwide</p>
+                          <h4 className="h6 mb-1">Global Community</h4>
+                          <p className="small mb-0">Learn Together</p>
                         </div>
                       </div>
                     </div>
                     <div className="col-6 col-md-4">
                       <div className="d-flex align-items-center">
-                        <div className="icon-box me-3">
-                          <i className="bi bi-star rating-icon"></i>
+                        <div className="icon-box me-3 d-flex align-items-center justify-content-center" 
+                             style={{ 
+                               width: "48px", 
+                               height: "48px", 
+                               borderRadius: "12px",
+                               background: "linear-gradient(135deg, #f59e0b, #f97316)",
+                               boxShadow: "0 4px 15px rgba(245, 158, 11, 0.2)"
+                             }}>
+                          <i className="bi bi-mortarboard-fill text-white fs-4"></i>
                         </div>
                         <div>
-                          <h4 className="h6 mb-1">4.9/5 Rating</h4>
-                          <p className="small mb-0">By Students</p>
+                          <h4 className="h6 mb-1">Expert Teachers</h4>
+                          <p className="small mb-0">Learn from the Best</p>
                         </div>
                       </div>
                     </div>
                     <div className="col-6 col-md-4">
                       <div className="d-flex align-items-center">
-                        <div className="icon-box me-3">
-                          <i className="bi bi-briefcase success-icon"></i>
+                        <div className="icon-box me-3 d-flex align-items-center justify-content-center" 
+                             style={{ 
+                               width: "48px", 
+                               height: "48px", 
+                               borderRadius: "12px",
+                               background: "linear-gradient(135deg, #10b981, #059669)",
+                               boxShadow: "0 4px 15px rgba(16, 185, 129, 0.2)"
+                             }}>
+                          <i className="bi bi-graph-up-arrow text-white fs-4"></i>
                         </div>
                         <div>
-                          <h4 className="h6 mb-1">93% Success</h4>
-                          <p className="small mb-0">Job Placement</p>
+                          <h4 className="h6 mb-1">Career Growth</h4>
+                          <p className="small mb-0">Achieve Your Goals</p>
                         </div>
                       </div>
                     </div>
@@ -352,16 +374,12 @@ function Home() {
                   className="floating-card p-3 position-absolute top-0 end-0"
                 >
                   <div className="d-flex align-items-center">
-                    <img 
-                      src="https://randomuser.me/api/portraits/women/1.jpg" 
-                      alt="" 
-                      className="rounded-circle me-3" 
-                      width="48" 
-                      height="48" 
-                    />
+                    <div className="me-3">
+                      <i className="fas fa-crown fa-2x" style={{ color: "#FFD700" }}></i>
+                    </div>
                     <div>
-                      <p className="text-dark mb-0 fw-medium">New Achievement!</p>
-                      <small className="text-muted">Completed React Course</small>
+                      <p className="text-dark mb-0 fw-medium">Dream Big!</p>
+                      <small className="text-muted">Your journey starts here</small>
                     </div>
                   </div>
                 </motion.div>
@@ -373,11 +391,11 @@ function Home() {
                 >
                   <div className="d-flex align-items-center">
                     <div className="me-3">
-                      <div className="chart-circle"></div>
+                      <i className="fas fa-magic fa-2x" style={{ color: "#00ff87" }}></i>
                     </div>
                     <div>
-                      <h4 className="h6 mb-1 text-dark">Learning Progress</h4>
-                      <p className="small text-primary mb-0">+64% this week</p>
+                      <h4 className="h6 mb-1 text-dark">Believe in Yourself</h4>
+                      <p className="small text-primary mb-0">Success awaits you</p>
                     </div>
                   </div>
                 </motion.div>
@@ -387,7 +405,7 @@ function Home() {
         </div>
 
         {/* Tech Stack Logos */}
-        <div className="tech-stack-wrapper position-absolute bottom-0 start-0 w-100">
+        <div className="tech-stack-wrapper position-absolute bottom-0 start-0 w-100 pb-4">
           <div className="container">
             <div className="row align-items-center">
               <div className="col-12 col-lg-3 mb-3 mb-lg-0">

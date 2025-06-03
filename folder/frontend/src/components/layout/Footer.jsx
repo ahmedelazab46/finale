@@ -107,9 +107,8 @@ function Footer() {
               <li>
                 <Link to="/faq" className="footer-link">FAQ</Link>
               </li>
-              <li>
-                <Link to="/help" className="footer-link">Help Center</Link>
-              </li>
+              {/* Removing Help Center Link */}
+              {/* <Link to="/help" className="footer-link">Help Center</Link> */}
               <li>
                 <Link to="/terms" className="footer-link">Terms of Service</Link>
               </li>

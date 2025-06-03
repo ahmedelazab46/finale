@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { FaClock, FaUserGraduate, FaStar, FaUsers, FaGraduationCap } from 'react-icons/fa';
+import '../styles/Courses.css';
 
 function CoursesPage() {
   const { user } = useAuth();
@@ -108,66 +110,91 @@ function CoursesPage() {
     { name: 'Personal Development', icon: '🎯', count: 85 },
   ];
 
+  console.log('بيانات الكورس:', courses);
+
+const getImageUrl = (course) => {
+  console.log('مسار صورة الكورس:', course.courseImage);
+  if (!course.courseImage) {
+    return 'https://via.placeholder.com/300x200?text=No+Image';
+  }
+  if (course.courseImage.startsWith('http')) {
+    return course.courseImage;
+  }
+  return `http://127.0.0.1:8000${course.courseImage}`;
+};
+
   return (
-    <div className="container py-8">
-      <div className="text-center mb-12">
-        <h1 className="display-4 fw-bold mb-4">استكشف كورساتنا</h1>
-        <p className="lead text-gray-600 mb-6">
-          اكتشف مجموعة واسعة من الكورسات التي يقدمها خبراء الصناعة
-        </p>
-        {error && <div className="alert alert-danger">{error}</div>}
-        {loading && <div className="alert alert-info">جاري تحميل الكورسات...</div>}
-        <div className="row justify-content-center">
-          <div className="col-md-8">
-            <div className="input-group mb-4">
-              <input
-                type="text"
-                className="form-control form-control-lg"
-                placeholder="ابحث عن كورسات..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button className="btn btn-red">
-                <i className="bi bi-search"></i>
-              </button>
+    <div className="courses-page">
+      <div className="container">
+        <div className="page-header">
+          <h1 className="text-center mb-2">Explore Our Courses</h1>
+          <p className="lead text-center mb-5 text-light-gray">
+            Discover a wide range of courses taught by industry experts
+          </p>
+          
+          {error && (
+            <div className="alert alert-danger bg-opacity-10 text-white border-danger">
+              {error}
+            </div>
+          )}
+          
+          <div className="row justify-content-center">
+            <div className="col-md-8">
+              <div className="search-bar d-flex">
+                <input
+                  type="text"
+                  className="form-control form-control-lg flex-grow-1"
+                  placeholder="Search courses..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button className="btn btn-red">
+                  <i className="bi bi-search"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="row">
-        <div className="col-lg-3 mb-4">
-          <div className="card border-0 shadow-sm">
-            <div className="card-body">
-              <h5 className="card-title mb-4">الفئات</h5>
+        <div className="row g-4">
+          <div className="col-lg-3">
+            <div className="filters-sidebar">
+              <h5>Categories</h5>
               <div className="d-flex flex-column gap-2">
+                <button
+                  className={`category-button ${selectedCategory === 'All' ? 'active' : ''}`}
+                  onClick={() => setSelectedCategory('All')}
+                >
+                  <span className="d-flex align-items-center justify-content-between">
+                    <span>All Categories</span>
+                    <span className="badge">{courses.length}</span>
+                  </span>
+                </button>
                 {categories.map((category) => (
                   <button
                     key={category.name}
-                    className={`btn text-start d-flex justify-content-between align-items-center ${
-                      selectedCategory === category.name ? 'btn-red' : 'btn-link text-dark'
-                    }`}
+                    className={`category-button ${selectedCategory === category.name ? 'active' : ''}`}
                     onClick={() => setSelectedCategory(category.name)}
                   >
-                    <span>
-                      <span className="me-2">{category.icon}</span>
-                      {category.name}
-                    </span>
-                    <span className="badge bg-gray-200 text-dark rounded-pill">
-                      {category.count}
+                    <span className="d-flex align-items-center justify-content-between">
+                      <span>
+                        <span className="me-2">{category.icon}</span>
+                        {category.name}
+                      </span>
+                      <span className="badge">{category.count}</span>
                     </span>
                   </button>
                 ))}
               </div>
-              <hr className="my-4" />
-              <h5 className="card-title mb-4">المستوى</h5>
+
+              <hr className="my-4" style={{ borderColor: 'rgba(255, 255, 255, 0.1)' }} />
+
+              <h5>Level</h5>
               <div className="d-flex flex-column gap-2">
                 {['All', 'Beginner', 'Intermediate', 'Advanced'].map((level) => (
                   <button
                     key={level}
-                    className={`btn text-start ${
-                      selectedLevel === level ? 'btn-red' : 'btn-link text-dark'
-                    }`}
+                    className={`category-button ${selectedLevel === level ? 'active' : ''}`}
                     onClick={() => setSelectedLevel(level)}
                   >
                     {level}
@@ -176,62 +203,82 @@ function CoursesPage() {
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="col-lg-9">
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <p className="mb-0">عرض {sortedCourses.length} كورسات</p>
-            <select
-              className="form-select w-auto"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-            >
-              <option value="popular">الأكثر شعبية</option>
-              <option value="newest">الأحدث</option>
-              <option value="price-low">السعر: من الأقل إلى الأعلى</option>
-              <option value="price-high">السعر: من الأعلى إلى الأقل</option>
-            </select>
-          </div>
+          <div className="col-lg-9">
+            <div className="d-flex justify-content-between align-items-center mb-4">
+              <p className="mb-0 text-light-gray">Showing {sortedCourses.length} courses</p>
+              <select
+                className="sort-select"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+              >
+                <option value="popular">Most Popular</option>
+                <option value="newest">Newest</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+              </select>
+            </div>
 
-          <div className="row g-4">
-            {sortedCourses.map((course) => (
-              <div key={course.id} className="col-md-6">
-                <div className="card h-100 border-0 shadow-sm hover-shadow-lg transition-all">
-                  <img
-                    src={course.courseImage || course.thumbnail}
-                    className="card-img-top"
-                    alt={course.title}
-                    style={{ height: '200px', objectFit: 'cover' }}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{course.title}</h5>
-                    <p className="card-text text-gray-600">{course.description}</p>
-                    <div className="d-flex align-items-center mb-3">
+            <div className="row g-4">
+              {sortedCourses.map((course) => (
+                <div key={course.id} className="col-md-6">
+                  <div className="course-card">
+                    <div className="course-image">
                       <img
-                        src={course.instructor?.avatar || 'https://via.placeholder.com/32'}
-                        alt={course.instructor?.name || 'Instructor'}
-                        className="rounded-circle me-2"
-                        style={{ width: '32px', height: '32px', objectFit: 'cover' }}
+                        src={course.thumbnail}
+                        alt={course.title}
+                        onError={(e) => {
+                          e.target.src = 'https://via.placeholder.com/300x200?text=No+Image';
+                        }}
                       />
-                      <span className="text-gray-600">{course.instructor?.name || 'Unknown'}</span>
                     </div>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="d-flex align-items-center">
-                        <i className="bi bi-star-fill text-warning me-1"></i>
-                        <span className="text-gray-600">{course.rating || 'N/A'}</span>
-                        <span className="text-gray-400 ms-2">({course.students || 0} طلاب)</span>
+                    <div className="course-content">
+                      <h3 className="course-title">{course.title}</h3>
+                      <p className="course-description">{course.description}</p>
+                      
+                      <div className="instructor-info">
+                        <img
+                          src={course.instructor.avatar}
+                          alt={course.instructor.name}
+                          className="instructor-avatar"
+                        />
+                        <div>
+                          <div className="instructor-name">{course.instructor.name}</div>
+                          <small className="text-light-gray">Instructor</small>
+                        </div>
                       </div>
-                      <span className="h5 mb-0">${course.price}</span>
+
+                      <div className="course-meta">
+                        <div className="meta-item">
+                          <FaClock />
+                          <span>{course.duration}</span>
+                        </div>
+                        <div className="meta-item">
+                          <FaGraduationCap />
+                          <span>{course.level}</span>
+                        </div>
+                        <div className="meta-item">
+                          <FaStar />
+                          <span>{course.rating}</span>
+                        </div>
+                        <div className="meta-item">
+                          <FaUsers />
+                          <span>{course.students} students</span>
+                        </div>
+                      </div>
+
+                      <div className="d-flex justify-content-between align-items-center">
+                        <div className="course-price">${course.price}</div>
+                        <Link to={`/courses/${course.slug}`} className="enroll-button">
+                          Learn More
+                          <i className="bi bi-arrow-right ms-2"></i>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                  <div className="card-footer bg-white border-0">
-                    <Link to={`/courses/${course.slug}`} className="btn btn-red w-100">
-                      عرض الكورس
-                    </Link>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -232,6 +232,25 @@
   border-color: rgba(255, 255, 255, 0.2);
 }
 
+.instructor-dashboard .logout-button {
+  background: linear-gradient(135deg, #ff4b4b 0%, #ff7676 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.instructor-dashboard .logout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(255, 75, 75, 0.4);
+}
+
 .instructor-dashboard .badge {
   padding: 0.35rem 0.65rem;
   border-radius: 0.5rem;

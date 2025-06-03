@@ -2,12 +2,28 @@
   background: linear-gradient(135deg, #1a1f2c 0%, #2d3748 100%);
   min-height: 100vh;
   color: white;
-  padding: 2rem;
+  padding-top: 76px;
+  padding-bottom: 2rem;
 }
 
 .student-profile .container {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.student-profile .profile-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.student-profile .profile-header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #fff, #a8b2d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .student-profile .profile-card {
@@ -70,8 +86,16 @@
   margin-bottom: 2rem;
 }
 
+.student-profile .section-title {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
 .student-profile .form-group {
   margin-bottom: 1.5rem;
+  text-align: right;
 }
 
 .student-profile .form-label {
@@ -81,10 +105,23 @@
   display: block;
 }
 
-.student-profile .form-control {
+.student-profile .input-group {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.student-profile .input-group-text {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: #a8b2d1;
+  padding: 0.75rem 1rem;
+}
+
+.student-profile .form-control {
+  background: transparent;
+  border: none;
   color: white;
   padding: 0.75rem 1rem;
   transition: all 0.3s ease;
@@ -92,7 +129,6 @@
 
 .student-profile .form-control:focus {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
   box-shadow: none;
   outline: none;
 }
@@ -103,7 +139,6 @@
 
 .student-profile .form-control:disabled {
   background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.05);
   color: rgba(255, 255, 255, 0.5);
   cursor: not-allowed;
 }
@@ -115,8 +150,8 @@
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
   font-weight: 500;
-  width: 100%;
   transition: all 0.3s ease;
+  width: 100%;
 }
 
 .student-profile .action-button:hover {
@@ -148,9 +183,23 @@
   color: #ef4444;
 }
 
+.student-profile .password-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 2rem;
+}
+
+.student-profile .loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  color: #a8b2d1;
+  font-size: 1.1rem;
+}
+
 @media (max-width: 768px) {
   .student-profile {
-    padding: 1rem;
+    padding: 76px 1rem 1rem;
   }
 
   .student-profile .profile-info {
@@ -165,5 +214,9 @@
 
   .student-profile .profile-name {
     font-size: 1.25rem;
+  }
+
+  .student-profile .section-title {
+    font-size: 1.1rem;
   }
 } 

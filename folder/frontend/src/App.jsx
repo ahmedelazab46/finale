@@ -31,7 +31,6 @@ import StudentProfile from './components/profile/StudentProfile';
 import AdminProfile from './components/profile/AdminProfile';
 import CourseDetail from './pages/CourseDetail';
 import FAQ from './pages/FAQ';
-import HelpCenter from './pages/HelpCenter';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import './styles/AdminDashboard.css';
@@ -174,7 +173,6 @@ function App() {
             <Route path="*" element={<Navigate to="/" />} />
             
             <Route path="/faq" element={<FAQ />} />
-            <Route path="/help" element={<HelpCenter />} />
             <Route path="/reset-password/confirm" element={<ResetPasswordPage />} />
           </Routes>
         </main>

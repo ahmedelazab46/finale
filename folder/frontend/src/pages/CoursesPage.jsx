@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaSearch, FaClock, FaLevelUpAlt } from 'react-icons/fa';
+import { FaSearch, FaClock, FaLevelUpAlt, FaUsers, FaStar } from 'react-icons/fa';
 import axios from 'axios';
 import './CoursesPage.css';
 
@@ -39,98 +39,106 @@ function CoursesPage() {
   }, [searchTerm, selectedCategory, selectedLevel]);
 
   const categories = [
-    'All',
-    'Programming',
-    'Design',
-    'Marketing',
-    'Business',
-    'Data Science',
+    { name: 'All', icon: '🎯', count: courses.length },
+    { name: 'Programming', icon: '💻', count: 150 },
+    { name: 'Design', icon: '🎨', count: 89 },
+    { name: 'Marketing', icon: '📊', count: 95 },
+    { name: 'Business', icon: '💼', count: 120 },
+    { name: 'Data Science', icon: '📈', count: 110 },
   ];
 
   const levels = ['All', 'Beginner', 'Intermediate', 'Advanced'];
 
   const getImageUrl = (course) => {
     if (!course.courseImage) {
-      return 'https://via.placeholder.com/300x200?text=No+Image';
+      return '/default-course.png';
     }
+    
+    if (course.courseImage.startsWith('/media')) {
+      return `http://127.0.0.1:8000${course.courseImage}`;
+    }
+    
     if (course.courseImage.startsWith('http')) {
       return course.courseImage;
     }
+    
     return `http://127.0.0.1:8000${course.courseImage}`;
   };
 
+  
+
   return (
-    <div className="bg-light min-vh-100">
-      <div className="bg-danger text-white py-5 text-center">
-        <h2 className="mb-3">Discover Your Next Skill</h2>
+    <div className="courses-page">
+      <section className="hero-section">
         <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-md-8">
-              <div className="input-group shadow">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search for courses..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <button className="btn btn-dark">
-                  <FaSearch />
-                </button>
-              </div>
-            </div>
+          <h2 className="text-center">Discover Your Next Skill</h2>
+          <div className="search-container">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search for courses..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button className="search-button">
+              <FaSearch />
+            </button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="container py-5">
-        <div className="row">
-          <div className="col-md-3 mb-4">
-            <h5>Filters</h5>
-            <hr />
-            <h6 className="text-muted">Categories</h6>
-            <ul className="list-unstyled">
+      <div className="container">
+        {error && (
+          <div className="alert" style={{ background: 'rgba(220, 53, 69, 0.1)', color: '#dc3545', border: '1px solid rgba(220, 53, 69, 0.2)', marginBottom: '2rem' }}>
+            {error}
+          </div>
+        )}
+
+        <div className="row g-4">
+          <div className="col-md-3">
+            <div className="filters-section">
+              <h5>Categories</h5>
               {categories.map((category) => (
-                <li key={category} className="mb-2">
-                  <button
-                    className={`btn w-100 text-start ${
-                      selectedCategory === category ? 'btn-danger text-white' : 'btn-outline-danger'
-                    }`}
-                    onClick={() => setSelectedCategory(category)}
-                  >
-                    {category}
-                  </button>
-                </li>
+                <button
+                  key={category.name}
+                  className={`filter-button ${selectedCategory === category.name ? 'active' : ''}`}
+                  onClick={() => setSelectedCategory(category.name)}
+                >
+                  <span className="d-flex align-items-center justify-content-between">
+                    <span>
+                      <span className="me-2">{category.icon}</span>
+                      {category.name}
+                    </span>
+                    <span className="badge">{category.count}</span>
+                  </span>
+                </button>
               ))}
-            </ul>
 
-            <h6 className="text-muted mt-4">Level</h6>
-            <ul className="list-unstyled">
+              <h5 className="mt-4">Level</h5>
               {levels.map((level) => (
-                <li key={level} className="mb-2">
-                  <button
-                    className={`btn w-100 text-start ${
-                      selectedLevel === level ? 'btn-danger text-white' : 'btn-outline-danger'
-                    }`}
-                    onClick={() => setSelectedLevel(level)}
-                  >
-                    {level}
-                  </button>
-                </li>
+                <button
+                  key={level}
+                  className={`filter-button ${selectedLevel === level ? 'active' : ''}`}
+                  onClick={() => setSelectedLevel(level)}
+                >
+                  {level}
+                </button>
               ))}
-            </ul>
+            </div>
           </div>
 
           <div className="col-md-9">
             {loading ? (
-              <div className="text-center py-5">Loading courses...</div>
-            ) : error ? (
-              <div className="text-center py-5 text-danger">{error}</div>
+              <div className="text-center py-5">
+                <div className="spinner-border text-light" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
             ) : (
               <>
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                  <p className="mb-0">Showing {courses.length} course(s)</p>
-                  <select className="form-select w-auto">
+                  <p className="mb-0 text-light-gray">Showing {courses.length} course(s)</p>
+                  <select className="sort-select">
                     <option>Most Popular</option>
                     <option>Newest</option>
                     <option>Price: Low to High</option>
@@ -140,38 +148,54 @@ function CoursesPage() {
 
                 <div className="row g-4">
                   {courses.map((course) => (
-                    <div key={course.id} className="col-md-6 col-lg-4">
-                      <div className="card h-100 border-0 shadow-sm">
-                        <img
-                          src={getImageUrl(course)}
-                          alt={course.title}
-                          className="card-img-top"
-                          style={{ height: '200px', objectFit: 'cover' }}
-                          onError={(e) => {
-                            e.target.src = 'https://via.placeholder.com/300x200?text=No+Image';
-                          }}
-                        />
-                        <div className="card-body bg-light">
-                          <h5 className="card-title">{course.title}</h5>
-                          <p className="card-text text-muted">
-                            {course.description?.substring(0, 60)}...
+                    <div key={course.id} className="col-md-6">
+                      <div className="course-card">
+                        <div className="course-image">
+                          <img
+                            src={getImageUrl(course)}
+                            alt={course.title}
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = '/default-course.png';
+                            }}
+                          />
+                        </div>
+                        <div className="course-content">
+                          <h3 className="course-title">{course.title}</h3>
+                          <p className="course-description">
+                            {course.description?.substring(0, 100)}...
                           </p>
-                          <div className="d-flex gap-3 mb-3">
-                            <small className="text-muted">
-                              <FaClock className="me-1" />
-                              {course.duration} hours
-                            </small>
-                            <small className="text-muted">
-                              <FaLevelUpAlt className="me-1" />
-                              {course.level}
-                            </small>
+                          
+                          <div className="course-meta">
+                            <div className="meta-item">
+                              <FaClock />
+                              <span>{course.duration} hours</span>
+                            </div>
+                            <div className="meta-item">
+                              <FaLevelUpAlt />
+                              <span>{course.level}</span>
+                            </div>
+                            {course.rating && (
+                              <div className="meta-item">
+                                <FaStar />
+                                <span>{course.rating}</span>
+                              </div>
+                            )}
+                            {course.enrolled_students && (
+                              <div className="meta-item">
+                                <FaUsers />
+                                <span>{course.enrolled_students} students</span>
+                              </div>
+                            )}
                           </div>
+
                           <div className="d-flex justify-content-between align-items-center">
-                            <span className="h5 mb-0">
+                            <div className="course-price">
                               {course.price == null || course.price === 0 ? 'Free' : `$${course.price}`}
-                            </span>
-                            <Link to={`/courses/${course.slug}`} className="btn btn-danger">
-                              Enroll Now
+                            </div>
+                            <Link to={`/courses/${course.slug}`} className="enroll-button">
+                              Learn More
+                              <i className="bi bi-arrow-right ms-2"></i>
                             </Link>
                           </div>
                         </div>

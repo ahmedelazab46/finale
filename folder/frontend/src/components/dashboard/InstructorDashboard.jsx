@@ -8,13 +8,16 @@ import {
   FaStar, 
   FaPlus, 
   FaChartLine,
-  FaUsers
+  FaUsers,
+  FaHome,
+  FaSignOutAlt
 } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
+import InstructorNavbar from '../layout/InstructorNavbar';
 import '../../styles/InstructorDashboard.css';
 
 const InstructorDashboard = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [stats, setStats] = useState({
     totalCourses: 0,
@@ -97,9 +100,15 @@ const InstructorDashboard = () => {
     fetchData();
   }, [navigate]);
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   if (loading) {
     return (
       <div className="instructor-dashboard">
+        <InstructorNavbar />
         <div className="loading-spinner">
           <div className="spinner-border" role="status">
             <span className="visually-hidden">Loading...</span>
@@ -112,6 +121,7 @@ const InstructorDashboard = () => {
   if (error) {
     return (
       <div className="instructor-dashboard">
+        <InstructorNavbar />
         <div className="alert alert-danger">{error}</div>
       </div>
     );
@@ -119,6 +129,7 @@ const InstructorDashboard = () => {
 
   return (
     <div className="instructor-dashboard">
+      <InstructorNavbar />
       <div className="container">
         <div className="dashboard-header">
           <div className="d-flex justify-content-between align-items-center">
@@ -131,9 +142,13 @@ const InstructorDashboard = () => {
                 <FaPlus className="me-2" />
                 Add New Course
               </button>
-              <button className="action-button secondary" onClick={() => navigate('/instructor/courses')}>
-                <FaBook className="me-2" />
-                Manage Courses
+              <button className="action-button secondary me-2" onClick={() => navigate('/')}>
+                <FaHome className="me-2" />
+                Back to Home
+              </button>
+              <button className="action-button logout-button" onClick={handleLogout}>
+                <FaSignOutAlt className="me-2" />
+                Logout
               </button>
             </div>
           </div>

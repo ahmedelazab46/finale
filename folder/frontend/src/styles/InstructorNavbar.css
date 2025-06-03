@@ -1,0 +1,76 @@
+.instructor-navbar {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+}
+
+.instructor-navbar .container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.instructor-navbar .navbar-brand {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: linear-gradient(to right, #fff, #a8b2d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.instructor-navbar .nav-link {
+  color: #a8b2d1;
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.instructor-navbar .nav-link:hover,
+.instructor-navbar .nav-link.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.instructor-navbar .nav-link svg {
+  font-size: 1.1rem;
+}
+
+.instructor-navbar .navbar-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  background: transparent;
+}
+
+.instructor-navbar .navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.instructor-navbar .navbar-collapse {
+  flex-grow: 0;
+}
+
+@media (max-width: 991px) {
+  .instructor-navbar .navbar-collapse {
+    background: rgba(26, 31, 44, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .instructor-navbar .nav-link {
+    padding: 0.75rem 1rem;
+    margin: 0.25rem 0;
+  }
+} 

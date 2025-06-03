@@ -1,168 +1,263 @@
 .admin-dashboard {
-  background: linear-gradient(135deg, #1e1e2f 0%, #2e2e4d 100%);
+  background: linear-gradient(135deg, #1a1f2c 0%, #2d3748 100%);
   min-height: 100vh;
   color: white;
+  padding-top: 76px;
   margin: 0;
-  padding: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow-y: auto;
+  position: relative;
 }
 
 .admin-dashboard .container {
-  padding-top: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-.dashboard-header {
-  padding: 1rem 0;
-  margin-bottom: 2rem;
+.admin-dashboard .dashboard-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.stats-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
-  transition: all 0.3s ease;
-}
-
-.stats-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.stats-card .icon {
+.admin-dashboard .dashboard-header h2 {
   font-size: 2rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, #e14eca 0%, #ba54f5 100%);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(to right, #fff, #a8b2d1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.stats-card h5 {
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 0.5rem;
-}
-
-.stats-card .value {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.stats-card .subtitle {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 0.9rem;
-}
-
-.data-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 2rem;
-}
-
-.data-card .card-header {
-  background: rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem 1.5rem;
-}
-
-.data-card .card-header h5 {
+.admin-dashboard .dashboard-header p {
+  color: #a8b2d1;
+  font-size: 1.1rem;
   margin: 0;
-  color: white;
-  font-weight: 600;
 }
 
-.data-card .card-body {
-  padding: 1.5rem;
+.admin-dashboard .stats-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.dashboard-table {
-  width: 100%;
-  color: white;
+.admin-dashboard .stats-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #e14eca, #ba54f5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.dashboard-table th {
-  color: rgba(255, 255, 255, 0.6);
+.admin-dashboard .stats-card:hover::before {
+  opacity: 1;
+}
+
+.admin-dashboard .stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.admin-dashboard .stats-card .icon {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  font-size: 2rem;
+  color: rgba(225, 78, 202, 0.3);
+  z-index: 1;
+}
+
+.admin-dashboard .stats-card h5 {
+  font-size: 1.1rem;
+  color: #a8b2d1;
+  margin-bottom: 1rem;
   font-weight: 500;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1rem;
+  position: relative;
+  z-index: 2;
 }
 
-.dashboard-table td {
-  padding: 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.admin-dashboard .stats-card .value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(to right, #fff, #a8b2d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  z-index: 2;
 }
 
-.dashboard-table tr:last-child td {
-  border-bottom: none;
+.admin-dashboard .stats-card .subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  position: relative;
+  z-index: 2;
 }
 
-.badge {
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
-  font-weight: 500;
-}
-
-.badge-primary {
-  background: linear-gradient(135deg, #e14eca 0%, #ba54f5 100%);
-}
-
-.badge-success {
-  background: linear-gradient(135deg, #2dce89 0%, #2dcecc 100%);
-}
-
-.action-button {
-  background: linear-gradient(135deg, #e14eca 0%, #ba54f5 100%);
-  border: none;
-  padding: 0.75rem 1.5rem;
-  color: white;
-  border-radius: 0.5rem;
-  font-weight: 600;
+.admin-dashboard .data-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
 }
 
-.action-button:hover {
+.admin-dashboard .data-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.admin-dashboard .data-card .card-header {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.5rem 2rem;
+  border-radius: 1.5rem 1.5rem 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-dashboard .data-card .card-header h5 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.admin-dashboard .data-card .card-body {
+  padding: 2rem;
+}
+
+.admin-dashboard .dashboard-table {
+  width: 100%;
+  color: white;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-dashboard .dashboard-table th {
+  color: #a8b2d1;
+  font-weight: 500;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.admin-dashboard .dashboard-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+
+.admin-dashboard .dashboard-table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-dashboard .dashboard-table tr {
+  transition: background-color 0.3s ease;
+}
+
+.admin-dashboard .dashboard-table tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.admin-dashboard .action-button {
+  background: linear-gradient(135deg, #e14eca 0%, #ba54f5 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.admin-dashboard .action-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(225, 78, 202, 0.4);
 }
 
-.action-button.secondary {
+.admin-dashboard .action-button.secondary {
   background: rgba(255, 255, 255, 0.1);
 }
 
-.action-button.secondary:hover {
+.admin-dashboard .action-button.secondary:hover {
   background: rgba(255, 255, 255, 0.15);
 }
 
-.quick-actions {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+.admin-dashboard .logout-button {
+  background: linear-gradient(135deg, #ff4b4b 0%, #ff7676 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.admin-dashboard .logout-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(255, 75, 75, 0.4);
+}
+
+.admin-dashboard .badge {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.admin-dashboard .badge-primary {
+  background: linear-gradient(135deg, #e14eca 0%, #ba54f5 100%);
+  color: white;
+}
+
+.admin-dashboard .badge-success {
+  background: linear-gradient(135deg, #2dce89 0%, #2dcecc 100%);
+  color: white;
 }
 
 @media (max-width: 768px) {
-  .stats-card {
+  .admin-dashboard .container {
+    padding: 1rem;
+  }
+
+  .admin-dashboard .dashboard-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .admin-dashboard .stats-card {
     margin-bottom: 1rem;
   }
-  
-  .dashboard-header {
-    padding: 1rem 0;
-  }
-  
-  .stats-card .value {
-    font-size: 1.5rem;
-  }
-  
-  .action-button {
+
+  .admin-dashboard .action-button,
+  .admin-dashboard .logout-button {
     width: 100%;
-    margin-bottom: 0.5rem;
+    justify-content: center;
+    margin: 0.5rem 0;
   }
 } 

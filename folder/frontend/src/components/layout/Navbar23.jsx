@@ -21,13 +21,12 @@ import {
 import './Navbar.css';
 import { Navbar, Nav, Container, Button, Dropdown } from 'react-bootstrap';
 
-const navItems = [
+const menuItems = [
   { label: 'Home', path: '/', icon: FaHome, auth: false },
-  { label: 'Courses', path: '/courses', icon: FaBookReader, auth: false },
-  { label: 'About', path: '/about', icon: FaLightbulb, auth: false },
-  { label: 'Contact', path: '/contact', icon: FaPaperPlane, auth: false },
+  { label: 'Courses', path: '/courses', icon: FaBook, auth: false },
+  { label: 'About', path: '/about', icon: FaInfoCircle, auth: false },
+  { label: 'Contact', path: '/contact', icon: FaEnvelope, auth: false },
   { label: 'Dashboard', path: '/dashboard', icon: FaUser, auth: true },
-  { label: 'Support', path: '/help', icon: FaComments, auth: false },
 ];
 
 const languages = [
@@ -99,7 +98,7 @@ function Navbar23() {
 
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto nav-links-container">
-            {navItems.map((item) => (
+            {menuItems.map((item) => (
               (!item.auth || (item.auth && isLoggedIn)) && (
                 <Nav.Link 
                   key={item.path}
